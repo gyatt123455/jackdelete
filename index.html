@@ -17,7 +17,13 @@
 
     <script>
         function showAlert() {
-            alert("DATA HAS BEEN DELETED");
+            // Show "Searching..." alert
+            alert("Searching...");
+
+            // Set a timeout to show "DATA HAS BEEN DELETED" after 3 seconds (3000 milliseconds)
+            setTimeout(function() {
+                alert("DATA HAS BEEN DELETED");
+            }, 3000); // 3000 milliseconds = 3 seconds
         }
     </script>
 
