@@ -1,19 +1,25 @@
-<doctype! html>
-  <html>
-<h1>
-  Press to delete <input type="text" id="username" name="username">(selected user) data
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Data</title>
+</head>
+<body>
 
-</h1>
+    <h1>
+        Press to delete <input type="text" id="username" name="username"> (selected user) data
+    </h1>
     <p>
-      USER INFO: <input type="text" id="Passkey" name="Passkey">
-      Passkey: <input type="text" id="Passkey" name="Passkey">
+        USER INFO: <input type="text" id="Passkey1" name="Passkey">
+        Passkey: <input type="text" id="Passkey2" name="Passkey">
     </p>
-  
-<button onclick="showAlert()">DELETE DATA</button>
-   <script> function showAlert(){
-alert("DATA HAS BEEN DELETED")
-   }
-<script/>
-    
-    
-  </html>
+
+    <button onclick="showAlert()">DELETE DATA</button>
+
+    <script>
+        function showAlert() {
+            alert("DATA HAS BEEN DELETED");
+        }
+    </script>
+
+</body>
+</html>
