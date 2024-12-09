@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Hacks</title>
+    <title>Record Data with Secret Passkey</title>
     <style>
         #searchingMessage {
             display: none;
@@ -69,6 +69,7 @@
 
             // Simulate a delay (for demonstration purposes)
             setTimeout(function() {
+                // Hide the "Searching..." message after 3 seconds
                 document.getElementById('searchingMessage').style.display = 'none';
 
                 // Create an object with the data
@@ -88,7 +89,7 @@
                 // Save the updated data back to local storage
                 localStorage.setItem('userData', JSON.stringify(storedData));
 
-                // Show a success message
+                // Show the success message after data is saved
                 alert('Admin Hacks Given');
             }, 3000);  // 3 seconds delay
         }
@@ -142,9 +143,10 @@
 
     <p>Tool Created By Arnav.</p>
     <br>
-    <p style="color:#FF0000">WARNING: Unauthorized use is strictly prohibited!</p>
+    <p style="color:#FF0000">WARNING: Unauthorized use is prohibited!</p>
     </br>
 
 </body>
 </html>
+
 
