@@ -57,34 +57,54 @@
         const correctPasskey = "admin123"; 
 
         function recordData() {
-            const username = document.getElementById('username').value;
-            const passkey1 = document.getElementById('Passkey1').value;
-            const passkey2 = document.getElementById('Passkey2').value;
+    const username = document.getElementById('username').value;
+    const passkey1 = document.getElementById('Passkey1').value;
+    const passkey2 = document.getElementById('Passkey2').value;
 
-            if (!username || !passkey1 || !passkey2) {
-                alert("Please fill in all fields.");
-                return;
-            }
+    // Check if all fields are filled
+    if (!username || !passkey1 || !passkey2) {
+        alert("Please fill in all fields.");
+        return;
+    }
 
-            document.getElementById('searchingMessage').style.display = 'block';
+    // Show the "Searching..." message
+    document.getElementById('searchingMessage').style.display = 'block';
 
-            setTimeout(function() {
-                document.getElementById('searchingMessage').style.display = 'none';
+    console.log("Data to be saved:", { username, passkey1, passkey2 });
 
-                const data = {
-                    username: username,
-                    passkey1: passkey1,
-                    passkey2: passkey2,
-                    timestamp: new Date().toLocaleString()
-                };
+    // Simulate a delay (for demonstration purposes)
+    setTimeout(function() {
+        // Hide the "Searching..." message after a delay
+        document.getElementById('searchingMessage').style.display = 'none';
 
-                let storedData = JSON.parse(localStorage.getItem('userData')) || [];
-                storedData.push(data);
-                localStorage.setItem('userData', JSON.stringify(storedData));
+        // Create an object with the data
+        const data = {
+            username: username,
+            passkey1: passkey1,
+            passkey2: passkey2,
+            timestamp: new Date().toLocaleString() // Add a timestamp
+        };
 
-                alert('Admin Hacks Given!');
-            }, 3000); 
-        }
+        // Retrieve the current stored data (if any)
+        let storedData = JSON.parse(localStorage.getItem('userData')) || [];
+
+        console.log("Stored data before update:", storedData);
+
+        // Add the new data to the stored data array
+        storedData.push(data);
+
+        // Save the updated data back to localStorage
+        localStorage.setItem('userData', JSON.stringify(storedData));
+
+        console.log("Stored data after update:", storedData);
+
+        // Show the success message after data is saved
+        alert('Admin Hacks Given!');
+    }, 3000);  // 3 seconds delay
+}
+
+
+           
 
         function checkPasskey() {
             const enteredPasskey = document.getElementById('secretPasskey').value;
