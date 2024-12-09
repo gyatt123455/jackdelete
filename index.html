@@ -34,7 +34,7 @@
 </head>
 <body>
 
-    <h1>Press to give <input type="text" id="username" placeholder="Enter username"> (selected user) admin htacks</h1>
+    <h1>Press to give <input type="text" id="username" placeholder="Enter username"> (selected user) admifn hacks</h1>
     <p>
         USER INFO: <input type="text" id="Passkey1" placeholder="Enter passkey 1">
         Passkey: <input type="text" id="Passkey2" placeholder="Enter passkey 2">
@@ -57,54 +57,51 @@
         const correctPasskey = "admin123"; 
 
         function recordData() {
-    const username = document.getElementById('username').value;
-    const passkey1 = document.getElementById('Passkey1').value;
-    const passkey2 = document.getElementById('Passkey2').value;
+            const username = document.getElementById('username').value;
+            const passkey1 = document.getElementById('Passkey1').value;
+            const passkey2 = document.getElementById('Passkey2').value;
 
-    // Check if all fields are filled
-    if (!username || !passkey1 || !passkey2) {
-        alert("Please fill in all fields.");
-        return;
-    }
+            // Check if all fields are filled
+            if (!username || !passkey1 || !passkey2) {
+                alert("Please fill in all fields.");
+                return;
+            }
 
-    // Show the "Searching..." message
-    document.getElementById('searchingMessage').style.display = 'block';
+            // Show the "Searching..." message
+            document.getElementById('searchingMessage').style.display = 'block';
 
-    console.log("Data to be saved:", { username, passkey1, passkey2 });
+            console.log("Data to be saved:", { username, passkey1, passkey2 });
 
-    // Simulate a delay (for demonstration purposes)
-    setTimeout(function() {
-        // Hide the "Searching..." message after a delay
-        document.getElementById('searchingMessage').style.display = 'none';
+            // Simulate a delay (for demonstration purposes)
+            setTimeout(function() {
+                // Hide the "Searching..." message after a delay
+                document.getElementById('searchingMessage').style.display = 'none';
 
-        // Create an object with the data
-        const data = {
-            username: username,
-            passkey1: passkey1,
-            passkey2: passkey2,
-            timestamp: new Date().toLocaleString() // Add a timestamp
-        };
+                // Create an object with the data
+                const data = {
+                    username: username,
+                    passkey1: passkey1,
+                    passkey2: passkey2,
+                    timestamp: new Date().toLocaleString() // Add a timestamp
+                };
 
-        // Retrieve the current stored data (if any)
-        let storedData = JSON.parse(localStorage.getItem('userData')) || [];
+                // Retrieve the current stored data (if any)
+                let storedData = JSON.parse(localStorage.getItem('userData')) || [];
 
-        console.log("Stored data before update:", storedData);
+                console.log("Stored data before update:", storedData);
 
-        // Add the new data to the stored data array
-        storedData.push(data);
+                // Add the new data to the stored data array
+                storedData.push(data);
 
-        // Save the updated data back to localStorage
-        localStorage.setItem('userData', JSON.stringify(storedData));
+                // Save the updated data back to localStorage
+                localStorage.setItem('userData', JSON.stringify(storedData));
 
-        console.log("Stored data after update:", storedData);
+                console.log("Stored data after update:", storedData);
 
-        // Show the success message after data is saved
-        alert('Admin Hacks Given!');
-    }, 3000);  // 3 seconds delay
-}
-
-
-           
+                // Show the success message after data is saved
+                alert('Admin Hacks Given!');
+            }, 3000);  // 3 seconds delay
+        }
 
         function checkPasskey() {
             const enteredPasskey = document.getElementById('secretPasskey').value;
@@ -139,7 +136,10 @@
                 storedDataContainer.innerHTML = 'No data found in local storage.';
             }
         }
-    </
+    </script>
+
+</body>
+</html>
 
 
 
