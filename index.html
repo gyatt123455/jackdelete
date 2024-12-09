@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+
+        <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Record Data with LocalStorage</title>
+    <title>Record Data with Secret Passkey</title>
     <style>
         #searchingMessage {
             display: none;
@@ -18,6 +19,10 @@
             border-radius: 5px;
             z-index: 9999;
         }
+
+        #displayDataBtn {
+            display: none; /* Initially hidden */
+        }
     </style>
 </head>
 <body>
@@ -29,7 +34,12 @@
     </p>
 
     <button onclick="recordData()">RECORD DATA</button>
-    <button onclick="displayData()">DISPLAY STORED DATA</button>
+    <br>
+    <p>Enter secret passkey to display data:</p>
+    <input type="text" id="secretPasskey" placeholder="Enter secret passkey">
+    <button onclick="checkPasskey()">Unlock Display Data</button>
+
+    <button id="displayDataBtn" onclick="displayData()">DISPLAY STORED DATA</button>
 
     <!-- Custom "Searching..." message -->
     <div id="searchingMessage">Searching...</div>
@@ -38,6 +48,10 @@
     <pre id="storedData"></pre>
 
     <script>
+        // Secret passkey (this can be any passkey you want)
+        const correctPasskey = "admin123"; // Replace with your own passkey
+
+        // Function to record the user data
         function recordData() {
             const username = document.getElementById('username').value;
             const passkey1 = document.getElementById('Passkey1').value;
@@ -65,6 +79,19 @@
             }, 3000);  // 3 seconds delay
         }
 
+        // Function to check if the entered passkey is correct
+        function checkPasskey() {
+            const enteredPasskey = document.getElementById('secretPasskey').value;
+
+            if (enteredPasskey === correctPasskey) {
+                // If passkey is correct, show the "Display Data" button
+                document.getElementById('displayDataBtn').style.display = 'inline-block'; // Make the button visible
+                alert("Passkey is correct! You can now view the stored data.");
+            } else {
+                alert("Incorrect passkey. Please try again.");
+            }
+        }
+
         // Function to display the stored data
         function displayData() {
             // Retrieve data from local storage
@@ -85,9 +112,8 @@
 
     <p>Tool Created By Arnav.</p>
     <br>
-    <p style="color:#FF0000">WARNING: Unauthorized use is prohibited!</p>
+    <p style="color:#FF0000">WARNING: Data will be permanently deleted!</p>
     </br>
 
 </body>
 </html>
-
